@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">notatka</string>
+
+    <string name="editor_name">editor</string>
+    <string name="title">Title</string>
+    <string name="body">Put your body here, babe</string>
 </resources>
