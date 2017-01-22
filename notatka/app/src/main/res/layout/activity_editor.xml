@@ -13,6 +13,7 @@
     tools:context="com.locovna.notatka.EditorActivity">
 
     <EditText
+        android:id="@+id/edit_note_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/title"
@@ -22,6 +23,7 @@
         android:textSize="24sp"/>
 
     <EditText
+        android:id="@+id/edit_note_textbody"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/body"
