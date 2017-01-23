@@ -17,14 +17,14 @@ public class NoteAdapter extends ArrayAdapter<Note> {
 
   public static final String LOG_TAG = NoteAdapter.class.getSimpleName();
 
-  public NoteAdapter(Activity context, ArrayList<Note> note){
+  public NoteAdapter(Activity context, ArrayList<Note> note) {
     super(context, 0, note);
   }
 
   @Override
-  public View getView(int position, View convertView, ViewGroup parent){
+  public View getView(int position, View convertView, ViewGroup parent) {
     View listItemView = convertView;
-    if (listItemView == null){
+    if (listItemView == null) {
       listItemView = LayoutInflater.from(getContext()).inflate(
           R.layout.list_item, parent, false);
     }

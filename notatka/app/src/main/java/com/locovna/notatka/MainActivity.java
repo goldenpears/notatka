@@ -1,5 +1,6 @@
 package com.locovna.notatka;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,17 +20,15 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
   public static final String TAG = MainActivity.class.getSimpleName();
+  private NoteDbHelper mNoteDbHelper;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    
+
     ArrayList<Note> notes = new ArrayList<Note>();
     notes.add(new Note("First notatka", "first blood"));
-    notes.add(new Note("Second notatka", "there is opopop"));
-    notes.add(new Note("My Sweet Salmon", "there is opopop, there is opopop, " +
-        "there is opopop, there is opopop"));
 
     final NoteAdapter mNoteAdapter = new NoteAdapter(this, notes);
     ListView listView = (ListView) findViewById(R.id.listview_note);
@@ -46,26 +45,58 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
+    mNoteDbHelper = new NoteDbHelper(this);
     displayDatabaseInfo();
 
   }
 
   private void displayDatabaseInfo() {
-    // To access our database, we instantiate our subclass of SQLiteOpenHelper
-    // and pass the context, which is the current activity.
     NoteDbHelper mDbHelper = new NoteDbHelper(this);
-
-    // Create and/or open a database to read from it
     SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
-    // Perform this raw SQL query "SELECT * FROM notes"
-    // to get a Cursor that contains all rows from the notes table.
-    Cursor cursor = db.rawQuery("SELECT * FROM " + NoteContract.NoteEntry.TABLE_NAME, null);
+    String[] projection = {
+        NoteContract.NoteEntry._ID,
+        NoteContract.NoteEntry.COLUMN_NOTE_TITLE,
+        NoteContract.NoteEntry.COLUMN_NOTE_TEXTBODY,
+    };
+
+    Cursor cursor = db.query(
+        NoteContract.NoteEntry.TABLE_NAME,         // The table to query
+        projection,                               // The columns to return
+        null,                       // The columns for the WHERE clause
+        null,                       // The values for the WHERE clause
+        null,                       // don't group the rows
+        null,                       // don't filter by row groups
+        null                        // The sort order
+    );
     try {
       Log.i(TAG, "Number of rows in notes database table: " + cursor.getCount());
+
+      Log.i(TAG, NoteContract.NoteEntry._ID + " - " +
+          NoteContract.NoteEntry.COLUMN_NOTE_TITLE + "\n");
+
+      int idColumnIndex = cursor.getColumnIndexOrThrow(NoteContract.NoteEntry._ID);
+      int nameColumnIndex = cursor.getColumnIndex(NoteContract.NoteEntry.COLUMN_NOTE_TITLE);
+
+      while (cursor.moveToNext()) {
+        int currentID = cursor.getInt(idColumnIndex);
+        String currentTitle = cursor.getString(nameColumnIndex);
+        Log.i(TAG, currentID + " - " + currentTitle + "\n");
+      }
+      cursor.close();
     } finally {
       cursor.close();
     }
+  }
+
+  private void insertNote() {
+    SQLiteDatabase db = mNoteDbHelper.getWritableDatabase();
+
+    ContentValues values = new ContentValues();
+    values.put(NoteContract.NoteEntry.COLUMN_NOTE_TITLE, "Hola, fella");
+    values.put(NoteContract.NoteEntry.COLUMN_NOTE_TEXTBODY, "I'm here but not for a long");
+
+    long newRowId = db.insert(NoteContract.NoteEntry.TABLE_NAME, null, values);
   }
 
   @Override
@@ -77,13 +108,23 @@ public class MainActivity extends AppCompatActivity {
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
+      case R.id.action_new_note:
+        Intent intent = new Intent(MainActivity.this, EditorActivity.class);
+        startActivity(intent);
       case R.id.action_insert_dummy_data:
-        // Do nothing for now
+        insertNote();
+        displayDatabaseInfo();
         return true;
       case R.id.action_delete_all_entries:
         // Do nothing for now
         return true;
     }
     return super.onOptionsItemSelected(item);
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    displayDatabaseInfo();
   }
 }
