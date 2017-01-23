@@ -10,4 +10,5 @@
     <string name="action_delete">delete</string>
     <string name="action_insert_dummy_data">put dummy data</string>
     <string name="action_delete_all_entries">delete all notes</string>
+    <string name="action_new_note">new note</string>
 </resources>
