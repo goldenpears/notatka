@@ -1,6 +1,5 @@
 package com.locovna.notatka;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -28,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
 
     ArrayList<Note> notes = new ArrayList<Note>();
-    notes.add(new Note("First notatka", "first blood"));
 
     final NoteAdapter mNoteAdapter = new NoteAdapter(this, notes);
     ListView listView = (ListView) findViewById(R.id.listview_note);
@@ -77,26 +75,26 @@ public class MainActivity extends AppCompatActivity {
 
       int idColumnIndex = cursor.getColumnIndexOrThrow(NoteContract.NoteEntry._ID);
       int nameColumnIndex = cursor.getColumnIndex(NoteContract.NoteEntry.COLUMN_NOTE_TITLE);
+      int bodyColumnIndex = cursor.getColumnIndex(NoteContract.NoteEntry.COLUMN_NOTE_TEXTBODY);
+
+      ArrayList<Note> notes = new ArrayList<Note>();
+
+      final NoteAdapter mNoteAdapter = new NoteAdapter(this, notes);
+      ListView listView = (ListView) findViewById(R.id.listview_note);
+      listView.setAdapter(mNoteAdapter);
 
       while (cursor.moveToNext()) {
         int currentID = cursor.getInt(idColumnIndex);
         String currentTitle = cursor.getString(nameColumnIndex);
+        String currentBody = cursor.getString(bodyColumnIndex);
+
         Log.i(TAG, currentID + " - " + currentTitle + "\n");
+        notes.add(new Note(currentTitle, currentBody));
       }
       cursor.close();
     } finally {
       cursor.close();
     }
-  }
-
-  private void insertNote() {
-    SQLiteDatabase db = mNoteDbHelper.getWritableDatabase();
-
-    ContentValues values = new ContentValues();
-    values.put(NoteContract.NoteEntry.COLUMN_NOTE_TITLE, "Hola, fella");
-    values.put(NoteContract.NoteEntry.COLUMN_NOTE_TEXTBODY, "I'm here but not for a long");
-
-    long newRowId = db.insert(NoteContract.NoteEntry.TABLE_NAME, null, values);
   }
 
   @Override
@@ -111,10 +109,6 @@ public class MainActivity extends AppCompatActivity {
       case R.id.action_new_note:
         Intent intent = new Intent(MainActivity.this, EditorActivity.class);
         startActivity(intent);
-      case R.id.action_insert_dummy_data:
-        insertNote();
-        displayDatabaseInfo();
-        return true;
       case R.id.action_delete_all_entries:
         // Do nothing for now
         return true;
