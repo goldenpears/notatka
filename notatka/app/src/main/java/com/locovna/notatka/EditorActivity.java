@@ -13,19 +13,17 @@ import android.widget.Toast;
 import com.locovna.notatka.data.NoteContract;
 import com.locovna.notatka.data.NoteDbHelper;
 
+import butterknife.BindView;
+
 public class EditorActivity extends AppCompatActivity {
 
-  private EditText mTitleEditText;
-
-  private EditText mTextbodyEditText;
+  @BindView(R.id.edit_note_title) EditText mTitleEditText;
+  @BindView(R.id.edit_note_textbody) EditText mTextbodyEditText;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_editor);
-
-    mTitleEditText = (EditText) findViewById(R.id.edit_note_title);
-    mTextbodyEditText = (EditText) findViewById(R.id.edit_note_textbody);
   }
 
   private void insertNote() {
@@ -38,10 +36,10 @@ public class EditorActivity extends AppCompatActivity {
     SQLiteDatabase db = mNoteDbHelper.getWritableDatabase();
 
     ContentValues values = new ContentValues();
-    values.put(NoteContract.NoteEntry.COLUMN_NOTE_TITLE, titleString);
-    values.put(NoteContract.NoteEntry.COLUMN_NOTE_TEXTBODY, textbodyString);
+    values.put(NoteContract.NoteEntry.Companion.getCOLUMN_NOTE_TITLE(), titleString);
+    values.put(NoteContract.NoteEntry.Companion.getCOLUMN_NOTE_TEXTBODY(), textbodyString);
 
-    long newRowId = db.insert(NoteContract.NoteEntry.TABLE_NAME, null, values);
+    long newRowId = db.insert(NoteContract.NoteEntry.Companion.getTABLE_NAME(), null, values);
 
     if (newRowId == -1) {
       Toast.makeText(this, "Error saving note", Toast.LENGTH_LONG).show();
