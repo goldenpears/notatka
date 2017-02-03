@@ -16,7 +16,6 @@ import com.locovna.notatka.data.NoteDbHelper;
 public class EditorActivity extends AppCompatActivity {
 
   private EditText mTitleEditText;
-
   private EditText mTextbodyEditText;
 
   @Override

@@ -1,4 +1,4 @@
-package com.locovna.notatka;
+package com.locovna.notatka.model;
 
 /**
  * Created by Darina Locovna on 1/17/17
