@@ -28,11 +28,11 @@ public class NoteDbHelper extends SQLiteOpenHelper{
   }
 
   private static final String SQL_CREATE_ENTRIES =
-      "CREATE TABLE " + NoteContract.NoteEntry.TABLE_NAME + " (" +
-          NoteContract.NoteEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-          NoteContract.NoteEntry.COLUMN_NOTE_TITLE + " TEXT," +
-          NoteContract.NoteEntry.COLUMN_NOTE_TEXTBODY + " TEXT)";
+      "CREATE TABLE " + NoteContract.NoteEntry.Companion.getTABLE_NAME() + " (" +
+          NoteContract.NoteEntry.Companion.get_ID() + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+          NoteContract.NoteEntry.Companion.getCOLUMN_NOTE_TITLE() + " TEXT," +
+          NoteContract.NoteEntry.Companion.getCOLUMN_NOTE_TEXTBODY() + " TEXT)";
 
   private static final String SQL_DELETE_ENTRIES =
-      "DROP TABLE IF EXISTS " + NoteContract.NoteEntry.TABLE_NAME;
+      "DROP TABLE IF EXISTS " + NoteContract.NoteEntry.Companion.getTABLE_NAME();
 }
