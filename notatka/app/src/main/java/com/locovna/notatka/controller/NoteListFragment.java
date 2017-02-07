@@ -2,37 +2,31 @@ package com.locovna.notatka.controller;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.locovna.notatka.R;
-import com.locovna.notatka.model.Note;
-
-import java.util.ArrayList;
 
 /**
- * Created by Darina Locovna on 2/2/17
+ * Created by Darina Locovna on 2/7/17
  */
 
-public class NoteListFragment extends Fragment{
+public class NoteListFragment extends Fragment {
 
-  private static final String TAG = NoteListFragment.class.getSimpleName();
-  private ArrayList<Note> notes;
-
-  @Override
-  public void onCreate(Bundle savedInstanceState){
-    super.onCreate(savedInstanceState);
-     notes = new ArrayList<Note>();
-  }
+  private RecyclerView mNoteRecyclerView;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                           Bundle savedInstanceState){
-    View v = inflater.inflate(R.layout.fragment_notelist, container, false);
-    v.setTag(TAG);
-    return v;
+                           Bundle savedInstanceState) {
+    View view = inflater.inflate(R.layout.fragment_note_list, container,
+        false);
+    mNoteRecyclerView = (RecyclerView) view
+        .findViewById(R.id.note_recycler_view);
+    mNoteRecyclerView.setLayoutManager(new LinearLayoutManager
+        (getActivity()));
+    return view;
   }
 }
-
-
