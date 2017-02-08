@@ -7,8 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.locovna.notatka.R;
+import com.locovna.notatka.model.Note;
+import com.locovna.notatka.model.NotesList;
+
+import java.util.List;
 
 /**
  * Created by Darina Locovna on 2/7/17
@@ -17,6 +22,7 @@ import com.locovna.notatka.R;
 public class NoteListFragment extends Fragment {
 
   private RecyclerView mNoteRecyclerView;
+  private NoteAdapter mAdapter;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,6 +33,52 @@ public class NoteListFragment extends Fragment {
         .findViewById(R.id.note_recycler_view);
     mNoteRecyclerView.setLayoutManager(new LinearLayoutManager
         (getActivity()));
+
+    updateUI();
     return view;
+  }
+
+  private void updateUI() {
+    NotesList notesList = NotesList.get(getActivity());
+    List<Note> notes = notesList.getNotesList();
+    mAdapter = new NoteAdapter(notes);
+    mNoteRecyclerView.setAdapter(mAdapter);
+  }
+
+  private class NoteHolder extends RecyclerView.ViewHolder {
+    public TextView mTitleTextView;
+
+    public NoteHolder(View itemView){
+      super(itemView);
+
+      mTitleTextView = (TextView) itemView;
+    }
+  }
+
+  private class NoteAdapter extends RecyclerView.Adapter<NoteHolder> {
+    private List<Note> mNotes;
+
+    public NoteAdapter(List<Note> notes) {
+      mNotes = notes;
+    }
+
+    @Override
+    public NoteHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+      LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+      View view = layoutInflater
+          .inflate(android.R.layout.simple_list_item_1, parent, false);
+      return new NoteHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(NoteHolder holder, int position) {
+      Note note = mNotes.get(position);
+      holder.mTitleTextView.setText(note.getTitle());
+    }
+
+    @Override
+    public int getItemCount() {
+      return mNotes.size();
+    }
   }
 }
