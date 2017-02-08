@@ -15,6 +15,9 @@ import com.locovna.notatka.model.NotesList;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Darina Locovna on 2/7/17
  */
@@ -45,13 +48,22 @@ public class NoteListFragment extends Fragment {
     mNoteRecyclerView.setAdapter(mAdapter);
   }
 
-  private class NoteHolder extends RecyclerView.ViewHolder {
-    public TextView mTitleTextView;
+  static class NoteHolder extends RecyclerView.ViewHolder {
+    private Note mNote;
+
+    @BindView(R.id.list_item_note_title) TextView mNoteTitle;
+    @BindView(R.id.list_item_note_body) TextView mNoteBody;
 
     public NoteHolder(View itemView){
       super(itemView);
+      ButterKnife.bind(this, itemView);
+    }
 
-      mTitleTextView = (TextView) itemView;
+    public void bindNote(Note note){
+      mNote = note;
+
+      mNoteTitle.setText(mNote.getTitle());
+      mNoteBody.setText(mNote.getBody());
     }
   }
 
@@ -66,14 +78,14 @@ public class NoteListFragment extends Fragment {
     public NoteHolder onCreateViewHolder(ViewGroup parent, int viewType) {
       LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
       View view = layoutInflater
-          .inflate(android.R.layout.simple_list_item_1, parent, false);
+          .inflate(R.layout.list_item_note, parent, false);
       return new NoteHolder(view);
     }
 
     @Override
     public void onBindViewHolder(NoteHolder holder, int position) {
       Note note = mNotes.get(position);
-      holder.mTitleTextView.setText(note.getTitle());
+      holder.bindNote(note);
     }
 
     @Override

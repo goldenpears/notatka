@@ -28,7 +28,7 @@ public class NotesList {
     for (int i = 0; i < 100; i++) {
       Note note = new Note();
       note.setTitle("Lovely note #" + i);
-      note.setBody("Body for " + i + " note");
+      note.setBody("Body for " + i + " lovely note");
       mNotesList.add(note);
     }
   }
