@@ -1,5 +1,6 @@
 package com.locovna.notatka.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.locovna.notatka.EditorActivity;
 import com.locovna.notatka.R;
 import com.locovna.notatka.model.Note;
 import com.locovna.notatka.model.NotesList;
@@ -48,7 +50,8 @@ public class NoteListFragment extends Fragment {
     mNoteRecyclerView.setAdapter(mAdapter);
   }
 
-  static class NoteHolder extends RecyclerView.ViewHolder {
+  public class NoteHolder extends RecyclerView.ViewHolder
+      implements View.OnClickListener{
     private Note mNote;
 
     @BindView(R.id.list_item_note_title) TextView mNoteTitle;
@@ -56,6 +59,7 @@ public class NoteListFragment extends Fragment {
 
     public NoteHolder(View itemView){
       super(itemView);
+      itemView.setOnClickListener(this);
       ButterKnife.bind(this, itemView);
     }
 
@@ -64,6 +68,12 @@ public class NoteListFragment extends Fragment {
 
       mNoteTitle.setText(mNote.getTitle());
       mNoteBody.setText(mNote.getBody());
+    }
+
+    @Override
+    public void onClick(View v) {
+      Intent intent = new Intent(getActivity(), EditorActivity.class);
+      startActivity(intent);
     }
   }
 

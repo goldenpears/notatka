@@ -7,16 +7,20 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by Darina Locovna on 2/7/17.
+ * A singleton class for create list of [Note] objects
+ *
+ * @constructor Creates list with 100 fakes notes
  */
-
-//singleton class
 
 public class NotesList {
   private static NotesList sNotesList;
   private List<Note> mNotesList;
 
   public static NotesList get(Context context){
+    /**
+     * Get a [NoteList]
+     * @return the new list
+     */
     if (sNotesList == null){
       sNotesList = new NotesList(context);
     }

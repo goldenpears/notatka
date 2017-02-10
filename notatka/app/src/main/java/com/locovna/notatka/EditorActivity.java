@@ -6,8 +6,8 @@ import android.view.MenuItem;
 
 import com.locovna.notatka.controller.NoteFragment;
 
-public class MainActivity extends SingleFragmentActivity {
-  public static final String TAG = MainActivity.class.getSimpleName();
+public class EditorActivity extends SingleFragmentActivity {
+  public static final String TAG = EditorActivity.class.getSimpleName();
 
   @Override
   protected Fragment createFragment() {
@@ -24,7 +24,7 @@ public class MainActivity extends SingleFragmentActivity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.action_new_note:
-        //    Intent intent=new Intent(MainActivity.this,EditorActivity.class);
+        //    Intent intent=new Intent(EditorActivity.this,EditorActivity.class);
         //    startActivity(intent);
         return true;
       case R.id.action_delete_all_entries:
