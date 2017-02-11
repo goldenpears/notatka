@@ -1,13 +1,25 @@
 package com.locovna.notatka;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.locovna.notatka.controller.NoteFragment;
 
+import java.util.UUID;
+
 public class EditorActivity extends SingleFragmentActivity {
   public static final String TAG = EditorActivity.class.getSimpleName();
+
+  public static final String EXTRA_NOTE_ID =
+      "com.locovna.notatka.noteintent.noteId";
+  public static Intent newIntent(Context packageContext, UUID noteId) {
+    Intent intent = new Intent(packageContext, EditorActivity.class);
+    intent.putExtra(EXTRA_NOTE_ID, noteId);
+    return intent;
+  }
 
   @Override
   protected Fragment createFragment() {

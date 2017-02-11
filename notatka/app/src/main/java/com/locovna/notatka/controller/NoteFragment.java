@@ -9,8 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.locovna.notatka.EditorActivity;
 import com.locovna.notatka.R;
 import com.locovna.notatka.model.Note;
+import com.locovna.notatka.model.NotesList;
+
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +34,10 @@ public class NoteFragment extends Fragment{
   @Override
   public void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
-    mNote = new Note();
+//    mNote = new Note();
+    UUID noteID = (UUID) getActivity().getIntent()
+        .getSerializableExtra(EditorActivity.EXTRA_NOTE_ID);
+    mNote = NotesList.get(getActivity()).getNote(noteID);
   }
 
   @Override
@@ -38,6 +45,9 @@ public class NoteFragment extends Fragment{
                            Bundle savedInstanceState){
     View v = inflater.inflate(R.layout.fragment_note, container, false);
     ButterKnife.bind(this, v);
+
+    title.setText(mNote.getTitle());
+    body.setText(mNote.getBody());
 
     title.addTextChangedListener(new TextWatcher() {
       @Override
