@@ -3,7 +3,12 @@ package com.locovna.notatka.model
 import java.util.*
 
 /**
- * Created by Darina Locovna on 1/17/17
+ * A single note object
+ *
+ * @property id the name of this note.
+ * @property title the title of this note.
+ * @property body the text body of this note.
+ * @constructor Creates an empty note with random id.
  */
 
 class Note {
