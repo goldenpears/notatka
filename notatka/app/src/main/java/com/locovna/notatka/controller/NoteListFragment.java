@@ -29,6 +29,8 @@ public class NoteListFragment extends Fragment {
   private RecyclerView mNoteRecyclerView;
   private NoteAdapter mAdapter;
 
+  private int mLastAdapterClickPosition = -1;
+
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
@@ -43,11 +45,27 @@ public class NoteListFragment extends Fragment {
     return view;
   }
 
+  @Override
+  public void onResume(){
+    super.onResume();
+    updateUI();
+  }
+
   private void updateUI() {
     NotesList notesList = NotesList.get(getActivity());
     List<Note> notes = notesList.getNotesList();
-    mAdapter = new NoteAdapter(notes);
-    mNoteRecyclerView.setAdapter(mAdapter);
+
+    if (mAdapter == null){
+      mAdapter = new NoteAdapter(notes);
+      mNoteRecyclerView.setAdapter(mAdapter);
+    } else {
+      if (mLastAdapterClickPosition < 0) {
+        mAdapter.notifyDataSetChanged();
+      } else {
+        mAdapter.notifyItemChanged(mLastAdapterClickPosition);
+        mLastAdapterClickPosition = -1;
+      }
+    }
   }
 
   public class NoteHolder extends RecyclerView.ViewHolder
@@ -72,7 +90,7 @@ public class NoteListFragment extends Fragment {
 
     @Override
     public void onClick(View v) {
-//      Intent intent = new Intent(getActivity(), EditorActivity.class);
+      mLastAdapterClickPosition = getAdapterPosition();
       Intent intent = EditorActivity.newIntent(getActivity(),
           mNote.getId());
       startActivity(intent);

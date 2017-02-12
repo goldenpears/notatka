@@ -13,7 +13,7 @@ import java.util.UUID;
 public class EditorActivity extends SingleFragmentActivity {
   public static final String TAG = EditorActivity.class.getSimpleName();
 
-  public static final String EXTRA_NOTE_ID =
+  private static final String EXTRA_NOTE_ID =
       "com.locovna.notatka.noteintent.noteId";
   public static Intent newIntent(Context packageContext, UUID noteId) {
     Intent intent = new Intent(packageContext, EditorActivity.class);
@@ -23,7 +23,8 @@ public class EditorActivity extends SingleFragmentActivity {
 
   @Override
   protected Fragment createFragment() {
-    return new NoteFragment();
+    UUID noteId = (UUID) getIntent().getSerializableExtra(EXTRA_NOTE_ID);
+    return NoteFragment.newInstance(noteId);
   }
 
   @Override

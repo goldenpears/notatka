@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.locovna.notatka.EditorActivity;
 import com.locovna.notatka.R;
 import com.locovna.notatka.model.Note;
 import com.locovna.notatka.model.NotesList;
@@ -23,26 +22,32 @@ import butterknife.ButterKnife;
  * Created by Darina Locovna on 2/7/17
  */
 
-public class NoteFragment extends Fragment{
+public class NoteFragment extends Fragment {
+  public static final String ARG_NOTE_ID = "note_id";
   private Note mNote;
 
-  @BindView(R.id.note_edit_title)
-  EditText title;
-  @BindView(R.id.note_edit_body)
-  EditText body;
+  @BindView(R.id.note_edit_title) EditText title;
+  @BindView(R.id.note_edit_body) EditText body;
+
+  public static NoteFragment newInstance(UUID noteId){
+    Bundle args = new Bundle();
+    args.putSerializable(ARG_NOTE_ID, noteId);
+
+    NoteFragment fragment = new NoteFragment();
+    fragment.setArguments(args);
+    return fragment;
+  }
 
   @Override
-  public void onCreate(Bundle savedInstanceState){
+  public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-//    mNote = new Note();
-    UUID noteID = (UUID) getActivity().getIntent()
-        .getSerializableExtra(EditorActivity.EXTRA_NOTE_ID);
-    mNote = NotesList.get(getActivity()).getNote(noteID);
+    UUID noteId = (UUID) getArguments().getSerializable(ARG_NOTE_ID);
+    mNote = NotesList.get(getActivity()).getNote(noteId);
   }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                           Bundle savedInstanceState){
+                           Bundle savedInstanceState) {
     View v = inflater.inflate(R.layout.fragment_note, container, false);
     ButterKnife.bind(this, v);
 
