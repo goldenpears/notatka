@@ -6,9 +6,8 @@
     <string name="title">Title</string>
     <string name="body">Put your body here, babe</string>
 
-    <string name="action_save">save</string>
-    <string name="action_delete">delete</string>
-    <string name="action_insert_dummy_data">put dummy data</string>
-    <string name="action_delete_all_entries">delete all notes</string>
     <string name="action_new_note">new note</string>
+    <string name="action_order_by_name">order by name</string>
+    <string name="action_delete_all_notes">delete all</string>
+    <string name="action_delete">delete</string>
 </resources>

@@ -13,6 +13,7 @@ object NoteContract {
             val TABLE_NAME = "notes"
 
             val _ID = BaseColumns._ID
+            val UUID = "uuid"
             val COLUMN_NOTE_TITLE = "title"
             val COLUMN_NOTE_TEXTBODY = "textbody"
         }

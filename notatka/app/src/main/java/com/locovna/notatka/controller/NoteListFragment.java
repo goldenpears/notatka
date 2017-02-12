@@ -123,4 +123,7 @@ public class NoteListFragment extends Fragment {
       return mNotes.size();
     }
   }
+
 }
+
+

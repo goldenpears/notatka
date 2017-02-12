@@ -28,8 +28,10 @@ public class NoteDbHelper extends SQLiteOpenHelper{
   }
 
   private static final String SQL_CREATE_ENTRIES =
-      "CREATE TABLE " + NoteContract.NoteEntry.Companion.getTABLE_NAME() + " (" +
+      "CREATE TABLE " +
+          NoteContract.NoteEntry.Companion.getTABLE_NAME() + " (" +
           NoteContract.NoteEntry.Companion.get_ID() + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+          NoteContract.NoteEntry.Companion.getUUID() + " INTEGER," +
           NoteContract.NoteEntry.Companion.getCOLUMN_NOTE_TITLE() + " TEXT," +
           NoteContract.NoteEntry.Companion.getCOLUMN_NOTE_TEXTBODY() + " TEXT)";
 

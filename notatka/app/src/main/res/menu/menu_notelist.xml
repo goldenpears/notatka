@@ -7,15 +7,14 @@
     <item
         android:id="@+id/action_new_note"
         android:title="@string/action_new_note"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_order_by_name"
+        android:title="@string/action_order_by_name"
+        app:showAsAction="never"/>
 
     <item
-        android:id="@+id/action_insert_dummy_data"
-        android:title="@string/action_insert_dummy_data"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_delete_all_entries"
-        android:title="@string/action_delete_all_entries"
-        app:showAsAction="never" />
+        android:id="@+id/action_delete_all_notes"
+        android:title="@string/action_delete_all_notes"
+        app:showAsAction="never"/>
 </menu>

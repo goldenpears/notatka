@@ -29,18 +29,14 @@ public class EditorActivity extends SingleFragmentActivity {
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_notelist, menu);
+    getMenuInflater().inflate(R.menu.menu_editor, menu);
     return true;
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case R.id.action_new_note:
-        //    Intent intent=new Intent(EditorActivity.this,EditorActivity.class);
-        //    startActivity(intent);
-        return true;
-      case R.id.action_delete_all_entries:
+      case R.id.action_delete_current_note_:
         return true;
     }
     return super.onOptionsItemSelected(item);

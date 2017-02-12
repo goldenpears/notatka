@@ -29,7 +29,7 @@ public class NotesList {
 
   private NotesList(Context context){
     mNotesList = new ArrayList<>();
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 10; i++) {
       Note note = new Note();
       note.setTitle("Lovely note #" + i);
       note.setBody("Body for " + i + " lovely note");
