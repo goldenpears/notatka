@@ -75,6 +75,7 @@ public class NoteListFragment extends Fragment {
       if (mLastAdapterClickPosition < 0) {
         mAdapter.notifyDataSetChanged();
       } else {
+        mAdapter.setNotes(notes);
         mAdapter.notifyItemChanged(mLastAdapterClickPosition);
         mLastAdapterClickPosition = -1;
       }
@@ -134,6 +135,10 @@ public class NoteListFragment extends Fragment {
     @Override
     public int getItemCount() {
       return mNotes.size();
+    }
+
+    public void setNotes(List<Note> notes){
+      mNotes = notes;
     }
   }
 

@@ -20,4 +20,8 @@ class Note() {
         this.id = UUID.randomUUID()
     }
 
+   constructor(noteId : UUID) : this() {
+    id = noteId;
+   }
+
 }

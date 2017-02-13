@@ -26,10 +26,12 @@ public class NoteFragment extends Fragment {
   public static final String ARG_NOTE_ID = "note_id";
   private Note mNote;
 
-  @BindView(R.id.note_edit_title) EditText title;
-  @BindView(R.id.note_edit_body) EditText body;
+  @BindView(R.id.note_edit_title)
+  EditText title;
+  @BindView(R.id.note_edit_body)
+  EditText body;
 
-  public static NoteFragment newInstance(UUID noteId){
+  public static NoteFragment newInstance(UUID noteId) {
     Bundle args = new Bundle();
     args.putSerializable(ARG_NOTE_ID, noteId);
 
@@ -43,6 +45,13 @@ public class NoteFragment extends Fragment {
     super.onCreate(savedInstanceState);
     UUID noteId = (UUID) getArguments().getSerializable(ARG_NOTE_ID);
     mNote = NotesList.get(getActivity()).getNote(noteId);
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+
+    NotesList.get(getActivity()).updateNote(mNote);
   }
 
   @Override
@@ -92,3 +101,4 @@ public class NoteFragment extends Fragment {
   }
 
 }
+
