@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorLight"
+    android:layout_marginBottom="@dimen/notelist_margin">
 
     <TextView
         android:id="@+id/list_item_note_title"
@@ -12,6 +14,7 @@
         android:layout_height="wrap_content"
         tools:text="some text"
         android:textStyle="bold"
+        android:textColor="@color/colorAccent"
         android:padding="@dimen/activity_horizontal_margin"
         android:textSize="24sp"/>
 
