@@ -12,7 +12,7 @@ import java.util.*
  */
 
 class Note() {
-    val id: UUID
+    var id: UUID
     var title: String? = ""
     var body: String? = ""
 
@@ -21,7 +21,7 @@ class Note() {
     }
 
    constructor(noteId : UUID) : this() {
-    id = noteId;
+    this.id = noteId
    }
 
 }

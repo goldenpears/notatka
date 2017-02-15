@@ -7,12 +7,7 @@ import com.locovna.notatka.model.Note;
 
 import java.util.UUID;
 
-import static android.R.attr.id;
 import static com.locovna.notatka.data.NoteContract.NoteEntry.Companion;
-
-/**
- * Created by Darina Locovna on 2/14/17.
- */
 
 public class NoteCursorWrapper extends CursorWrapper {
   public NoteCursorWrapper(Cursor cursor){
@@ -20,7 +15,7 @@ public class NoteCursorWrapper extends CursorWrapper {
   }
 
   public Note getNote(){
-    String uuid = getString(getColumnIndex(Companion.getUUID().toString()));
+    String uuid = getString(getColumnIndex(Companion.getUUID()));
     String title = getString(getColumnIndex(Companion.getCOLUMN_NOTE_TITLE()));
     String body = getString(getColumnIndex(Companion.getCOLUMN_NOTE_TEXTBODY()));
 
