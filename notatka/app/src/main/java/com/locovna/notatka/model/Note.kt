@@ -11,13 +11,12 @@ import java.util.*
  * @constructor Creates an empty note with random id.
  */
 
-class Note() {
+class Note {
     val id: UUID
     var title: String? = ""
     var body: String? = ""
 
-    init {
+    constructor() {
         this.id = UUID.randomUUID()
     }
-
 }

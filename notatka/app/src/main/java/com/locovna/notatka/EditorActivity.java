@@ -15,7 +15,6 @@ public class EditorActivity extends SingleFragmentActivity {
 
   private static final String EXTRA_NOTE_ID =
       "com.locovna.notatka.noteintent.noteId";
-
   public static Intent newIntent(Context packageContext, UUID noteId) {
     Intent intent = new Intent(packageContext, EditorActivity.class);
     intent.putExtra(EXTRA_NOTE_ID, noteId);

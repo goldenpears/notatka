@@ -6,11 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * A singleton class for create list of [Note] objects
+ *
+ * @constructor Creates list with 100 fakes notes
+ */
+
 public class NotesList {
   private static NotesList sNotesList;
   private List<Note> mNotesList;
 
   public static NotesList get(Context context){
+    /**
+     * Get a [NoteList]
+     * @return the new list
+     */
     if (sNotesList == null){
       sNotesList = new NotesList(context);
     }
@@ -19,10 +29,12 @@ public class NotesList {
 
   private NotesList(Context context){
     mNotesList = new ArrayList<>();
-  }
-
-  public void addNote(Note n){
-    mNotesList.add(n);
+    for (int i = 0; i < 10; i++) {
+      Note note = new Note();
+      note.setTitle("Lovely note #" + i);
+      note.setBody("Body for " + i + " lovely note");
+      mNotesList.add(note);
+    }
   }
 
   public List<Note> getNotesList(){

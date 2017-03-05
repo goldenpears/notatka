@@ -1,15 +1,11 @@
 package com.locovna.notatka.controller;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -20,7 +16,6 @@ import com.locovna.notatka.model.Note;
 import com.locovna.notatka.model.NotesList;
 
 import java.util.List;
-import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,19 +25,11 @@ import butterknife.ButterKnife;
  */
 
 public class NoteListFragment extends Fragment {
-  private static final String EXTRA_NOTE_ID =
-      "com.locovna.notatka.noteintent.noteId";
 
   private RecyclerView mNoteRecyclerView;
   private NoteAdapter mAdapter;
 
   private int mLastAdapterClickPosition = -1;
-
-  @Override
-  public void onCreate(Bundle savedInstanceState){
-    super.onCreate(savedInstanceState);
-    setHasOptionsMenu(true);
-  }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,7 +69,7 @@ public class NoteListFragment extends Fragment {
   }
 
   public class NoteHolder extends RecyclerView.ViewHolder
-                          implements View.OnClickListener{
+      implements View.OnClickListener{
     private Note mNote;
 
     @BindView(R.id.list_item_note_title) TextView mNoteTitle;
@@ -137,36 +124,6 @@ public class NoteListFragment extends Fragment {
     }
   }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-      super.onCreateOptionsMenu(menu, inflater);
-      inflater.inflate(R.menu.menu_notelist, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-      switch (item.getItemId()) {
-
-        case R.id.action_new_note:
-          Note note = new Note();
-          NotesList.get(getActivity()).addNote(note);
-          Intent intent = newIntent(getActivity(), note.getId());
-          startActivity(intent);
-          return true;
-
-        case R.id.action_order_by_name:
-        return true;
-
-        case R.id.action_delete_all_notes:
-          return true;
-      }
-      return super.onOptionsItemSelected(item);
-    }
-
-  public static Intent newIntent(Context packageContext, UUID noteId) {
-    Intent intent = new Intent(packageContext, EditorActivity.class);
-    intent.putExtra(EXTRA_NOTE_ID, noteId);
-    return intent;
-  }
-
 }
+
+
