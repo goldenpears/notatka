@@ -1,4 +1,6 @@
 # notatka
+[![forthebadge](http://forthebadge.com/images/badges/built-for-android.svg)](http://forthebadge.com)
+
 keep, organize and create your notes with notatka
 
 currently is under development
