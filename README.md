@@ -1,11 +1,9 @@
-# notatka
-[![forthebadge](http://forthebadge.com/images/badges/built-for-android.svg)](http://forthebadge.com)
-
+<h1 align="center"> notatka</h1>
 keep, organize and create your notes with notatka
 
-currently is under development
+_currently is under development_
 
 will also avaible on [web](https://github.com/locovna/notatka-web)
 
-##concept
+## concept
 ![fake](http://locovna.com/img/notatka.png)
