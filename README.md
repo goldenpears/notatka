@@ -1,9 +1,7 @@
 <h1 align="center"> notatka</h1>
-keep, organize and create your notes with notatka
+note app
 
-_currently is under development_
-
-will also avaible on [web](https://github.com/locovna/notatka-web)
-
-## concept
-![fake](http://locovna.com/img/notatka.png)
+## how to start?
+- `git clone https://github.com/goldenpears/notatka.git`
+- import `notatka/notatka` folder via Android Studio
+- run on the emulator or your device in the debug mode
